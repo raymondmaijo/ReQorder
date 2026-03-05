@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReQoder: Resonance Simulator — Frequency vs Current</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.1/dist/chartjs-plugin-annotation.min.js"></script>
+  
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div style="width:60px;height:60px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700">RQ</div>
+      <div>
+        <h1 style="margin:5px 0 5px 0;font-size:20px">ReQoder</h1>
+        <h2>LCR Resonance Simulator — Frequency vs Current</h2>
+        <div class="small">Enter circuit parameters, sweep frequency and view the current magnitude & resonant frequency.</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="panel">
+        <h3 style="margin-top:0">Inputs</h3>
+        <div class="row">
+          <div style="flex:1">
+            <label>Inductance L (mH)</label>
+            <input id="L" type="number" step="any" value="10" />
+          </div>
+          <div style="width:110px">
+            <label>Resistance R (Ω)</label>
+            <input id="R" type="number" step="any" value="5" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="flex:1">
+            <label>Capacitance C (nF)</label>
+            <input id="C" type="number" step="any" value="100" />
+          </div>
+          <div style="width:110px">
+            <label>Vin (V)</label>
+            <input id="Vin" type="number" step="any" value="1" />
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:6px">Frequency Sweep</h3>
+        <div class="row">
+          <div style="flex:1">
+            <label>Start frequency (Hz)</label>
+            <input id="fStart" type="number" step="any" value="10" />
+          </div>
+          <div style="width:120px">
+            <label>End frequency (Hz)</label>
+            <input id="fEnd" type="number" step="any" value="10000" />
+          </div>
+        </div>
+        <div class="row">
+          <div style="flex:1">
+            <label>Points</label>
+            <input id="points" type="number" step="1" value="400" />
+          </div>
+          <div style="width:120px">
+            <label>Scale</label>
+            <select id="scale">
+              <option value="linear">Linear</option>
+              <option value="log">Logarithmic</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button id="simulate">Simulate</button>
+          <button id="download">Download CSV</button>
+          <button id="reset">Reset</button>
+        </div>
+
+        <div class="info">
+          <div class="pill" id="resonant">Resonant f<sub>0</sub>: — Hz</div>
+          <div class="pill" id="Qv">Quality factor Q: —</div>
+          <div class="pill" id="Ires">I<sub>res</sub>: — A</div>
+        </div>
+
+        
+      </div>
+
+      <div class="panel chart-wrap">
+        <canvas id="chart" height="420"></canvas>
+      </div>
+    </div>
+
+    
+  </div>
+  <script src="app.js"></script>
+  
+</body>
+</html>
